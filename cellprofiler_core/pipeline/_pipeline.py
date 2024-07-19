@@ -1076,7 +1076,9 @@ class Pipeline:
                     cpu_t0 = sum(os_times[:-1])
 
                     try:
+                        print(f"### Running {module.module_name}")
                         self.run_module(module, workspace)
+                        print("### Success!")
                     except Exception as instance:
                         print("pipeline_exception")
                         LOGGER.error(
@@ -1176,6 +1178,7 @@ class Pipeline:
                         yield measurements
 
                     if workspace.disposition == DISPOSITION_SKIP:
+                        print("We are done...")
                         break
                     elif workspace.disposition == DISPOSITION_CANCEL:
                         measurements.add_experiment_measurement(EXIT_STATUS, "Failure")
